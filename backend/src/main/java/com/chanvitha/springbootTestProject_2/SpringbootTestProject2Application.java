@@ -24,3 +24,4 @@ public class SpringbootTestProject2Application {
 		};
 	}
 }
+
