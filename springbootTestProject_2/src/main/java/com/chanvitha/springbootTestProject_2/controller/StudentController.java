@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/student")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class StudentController {
 
     @Autowired
@@ -25,16 +26,31 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
-    @PutMapping("/update")
-    public String updateStudent(@RequestBody Student student) {
-        studentService.saveStudent(student);
-        return "Student updated";
+    @GetMapping("/getbyid/{id}")
+    public Student getStudentById(@PathVariable int id) {
+        return studentService.getStudentById(id);
+    }
+
+    @PutMapping("/update/{id}")
+    public String updateStudent(@RequestBody Student student, @PathVariable int id) {
+        if(id != 0){
+            studentService.updateStudent(student, id);
+            return "Student updated";
+        }
+        else{
+            return "Student not found";
+        }
     }
 
     @DeleteMapping("/delete/{id}")
     public String deleteStudent(@PathVariable int id) {
-        studentService.deleteStudent(id);
-        return "Student deleted";
+        if(id != 0){
+            studentService.deleteStudent(id);
+            return "Student deleted";
+        }
+        else{
+            return "Student not found";
+        }
     }
 
 }
