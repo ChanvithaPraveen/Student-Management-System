@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Container, Paper } from "@mui/material";
@@ -32,6 +32,7 @@ export default function BodyBox() {
       .then((res) => res.json())
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
+      alert("Student added successfully!");
   };
 
   const handleUpdate = (f: { preventDefault: () => void; }) => {
@@ -47,6 +48,7 @@ export default function BodyBox() {
       .then((res) => res.json())
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
+      alert("Student updated successfully!");
   };
 
   const handleDelete = (id: number) => {
@@ -56,6 +58,7 @@ export default function BodyBox() {
       .then((res) => res.json())
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
+      alert("Student deleted successfully!");
   };
 
   useEffect(() => {
@@ -148,7 +151,7 @@ export default function BodyBox() {
             value={updateAddress}
             onChange={(e) => setUpdateAddress(e.target.value)}
           />
-          <Button variant="contained" color="primary" onClick={handleUpdate}>
+          <Button variant="contained" color="success" onClick={handleUpdate}>
             Update
           </Button>
         </Box>
@@ -161,8 +164,8 @@ export default function BodyBox() {
             <Paper elevation={6} style={{ margin: "10px", padding: "15px", textAlign: "left" }} key={student.id}>
               ID: {student.id}<br />
               Name: {student.name}<br />
-              Address: {student.address}<br />
-              <Button variant="contained" color="secondary" onClick={() => handleDelete(student.id)}>
+              Address: {student.address}<br /><br />
+              <Button variant="contained" color="error" onClick={() => handleDelete(student.id)}>
                 Delete
               </Button>
             </Paper>
